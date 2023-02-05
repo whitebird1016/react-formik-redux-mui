@@ -7,14 +7,47 @@ import {
   Link,
   TextField,
   Typography,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@material-ui/core";
 import { Formik } from "formik";
 import { NavLink } from "react-router-dom";
 import validationSchema from "./schema";
+import { login } from "../../../actions/auth";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 const Login = () => {
-  const handleSubmit = () => {
-    console.log("s");
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+  const [lang, setLang] = useState();
+
+  const LanguageChoose = (e) => {
+    let language = e.target.value;
+    switch (language) {
+      case "english":
+        setLang("english");
+        language = "English";
+        break;
+      case "spanish":
+        setLang("spanish");
+        language = "Spanish";
+        break;
+      default:
+        break;
+    }
+    i18n.changeLanguage(language);
+  };
+  const handleSubmit = async (values) => {
+    await dispatch(
+      login({
+        email: values.email,
+        password: values.password,
+      })
+    );
   };
   return (
     <Box
@@ -51,9 +84,7 @@ const Login = () => {
                 >
                   <Typography variant="h4">Welcome</Typography>
                   <Box mt={2}>
-                    <Typography variant="body1">
-                      Sign in to your account
-                    </Typography>
+                    <Typography variant="body1">{t("title")}</Typography>
                   </Box>
                 </Box>
                 <CardContent>
@@ -61,7 +92,7 @@ const Login = () => {
                     error={Boolean(touched.email && errors.email)}
                     fullWidth
                     helperText={touched.email && errors.email}
-                    label="Email"
+                    label={t("email")}
                     margin="normal"
                     name="email"
                     onBlur={handleBlur}
@@ -69,12 +100,12 @@ const Login = () => {
                     type="email"
                     value={values.email}
                     variant="outlined"
-                  ></TextField>
+                  />
                   <TextField
                     error={Boolean(touched.password && errors.password)}
                     fullWidth
                     helperText={touched.password && errors.password}
-                    label="Password"
+                    label={t("password")}
                     margin="normal"
                     name="password"
                     onBlur={handleBlur}
@@ -92,14 +123,14 @@ const Login = () => {
                       type="submit"
                       variant="contained"
                     >
-                      Sign In
+                      {t("button")}
                     </Button>
                   </Box>
                 </CardContent>
               </Card>
               <Box mt={5} textAlign="center">
                 <Typography variant="body1">
-                  Don't have an account ?{" "}
+                  {t("text")}
                   <Link component={NavLink} to="/register">
                     Create one here
                   </Link>
@@ -109,6 +140,20 @@ const Login = () => {
           )}
         </Formik>
       </Container>
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Select Language</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={lang}
+            onChange={LanguageChoose}
+          >
+            <MenuItem value="english">English</MenuItem>
+            <MenuItem value="spanish">Spanish</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
     </Box>
   );
 };

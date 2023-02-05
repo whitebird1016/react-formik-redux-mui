@@ -11,19 +11,29 @@ import {
 import { Formik } from "formik";
 import { NavLink } from "react-router-dom";
 import validationSchema from "./schema";
+import { useDispatch } from "react-redux";
+import { signup } from "../../../actions/auth";
+// const PHONE_REGEX = new RegExp(/"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"/gmi);
 
 const Register = () => {
-  const handleSubmit = () => {
-    console.log("s");
+  const dispatch = useDispatch();
+  const handleSubmit = async (values) => {
+    await dispatch(
+      signup({
+        firstname: values.firstName,
+        lastname: values.lastName,
+        email: values.email,
+        address1: values.address1,
+        address2: values.address2,
+        city: values.city,
+        state: values.state,
+        phone: values.phonenumber,
+        password: values.password,
+      })
+    );
   };
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      height="100vh"
-      justifyContent="center"
-      mt={-4}
-    >
+    <Box display="flex" flexDirection="column" justifyContent="center" mt={4}>
       <Container maxWidth="sm">
         <Formik
           initialValues={{
@@ -160,6 +170,7 @@ const Register = () => {
                   <TextField
                     error={Boolean(touched.phonenumber && errors.phonenumber)}
                     fullWidth
+                    placeholder="999-999-9999"
                     helperText={touched.phonenumber && errors.phonenumber}
                     label="Phone"
                     margin="normal"

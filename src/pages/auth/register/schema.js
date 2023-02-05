@@ -1,5 +1,7 @@
 import * as Yup from "yup";
 
+const phoneRegExp = /^(?:\(\d{3}\)|\d{3}-)\d{3}-\d{4}$/;
+
 const equalTo = (ref, msg) => {
   return Yup.mixed().test({
     name: "equalTo",
@@ -23,10 +25,12 @@ export default Yup.object().shape({
     .max(255)
     .required("Email is required"),
   address1: Yup.string().required("Address1 is required"),
-  address2: Yup.string().required("Address2 is required"),
+  address2: Yup.string(),
   city: Yup.string().required("City is required"),
   state: Yup.string().required("State is required"),
-  phonenumber: Yup.string().required("Phone is required"),
+  phonenumber: Yup.string()
+    .matches(phoneRegExp, "Phone number is not valid")
+    .required("Phone is required"),
   password: Yup.string().max(255).required("Password is required"),
   confirmPassword: Yup.string()
     .max(255)
