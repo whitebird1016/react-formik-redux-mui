@@ -14,8 +14,11 @@ import validationSchema from "./schema";
 import { useDispatch } from "react-redux";
 import { signup } from "../../../actions/auth";
 // const PHONE_REGEX = new RegExp(/"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"/gmi);
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const handleSubmit = async (values) => {
     await dispatch(
@@ -69,7 +72,7 @@ const Register = () => {
                   justifyContent="center"
                   mt={2}
                 >
-                  <Typography variant="h4">Create Account</Typography>
+                  <Typography variant="h4"> {t("signtitle")}</Typography>
                 </Box>
                 <CardContent>
                   <Box display="flex" justifyContent="space-between">
@@ -78,7 +81,7 @@ const Register = () => {
                         error={Boolean(touched.firstName && errors.firstName)}
                         fullWidth
                         helperText={touched.firstName && errors.firstName}
-                        label="First name"
+                        label={t("firstname")}
                         margin="normal"
                         name="firstName"
                         onBlur={handleBlur}
@@ -92,7 +95,7 @@ const Register = () => {
                         error={Boolean(touched.lastName && errors.lastName)}
                         fullWidth
                         helperText={touched.lastName && errors.lastName}
-                        label="Last name"
+                        label={t("lastname")}
                         margin="normal"
                         name="lastName"
                         onBlur={handleBlur}
@@ -106,7 +109,7 @@ const Register = () => {
                     error={Boolean(touched.email && errors.email)}
                     fullWidth
                     helperText={touched.email && errors.email}
-                    label="Email"
+                    label={t("email")}
                     margin="normal"
                     name="email"
                     onBlur={handleBlur}
@@ -119,7 +122,7 @@ const Register = () => {
                     error={Boolean(touched.address1 && errors.address1)}
                     fullWidth
                     helperText={touched.address1 && errors.address1}
-                    label="Address1"
+                    label={t("address1")}
                     margin="normal"
                     name="address1"
                     onBlur={handleBlur}
@@ -132,7 +135,7 @@ const Register = () => {
                     error={Boolean(touched.address2 && errors.address2)}
                     fullWidth
                     helperText={touched.address2 && errors.address2}
-                    label="Address2"
+                    label={t("address2")}
                     margin="normal"
                     name="address2"
                     onBlur={handleBlur}
@@ -145,7 +148,7 @@ const Register = () => {
                     error={Boolean(touched.city && errors.city)}
                     fullWidth
                     helperText={touched.city && errors.city}
-                    label="City"
+                    label={t("city")}
                     margin="normal"
                     name="city"
                     onBlur={handleBlur}
@@ -158,7 +161,7 @@ const Register = () => {
                     error={Boolean(touched.state && errors.state)}
                     fullWidth
                     helperText={touched.state && errors.state}
-                    label="State"
+                    label={t("state")}
                     margin="normal"
                     name="state"
                     onBlur={handleBlur}
@@ -172,7 +175,7 @@ const Register = () => {
                     fullWidth
                     placeholder="999-999-9999"
                     helperText={touched.phonenumber && errors.phonenumber}
-                    label="Phone"
+                    label={t("phone")}
                     margin="normal"
                     name="phonenumber"
                     onBlur={handleBlur}
@@ -187,7 +190,7 @@ const Register = () => {
                         error={Boolean(touched.password && errors.password)}
                         fullWidth
                         helperText={touched.password && errors.password}
-                        label="Password"
+                        label={t("password")}
                         margin="normal"
                         name="password"
                         onBlur={handleBlur}
@@ -206,9 +209,9 @@ const Register = () => {
                         helperText={
                           touched.confirmPassword && errors.confirmPassword
                         }
-                        label="Confirm Password"
+                        label={t("confirmpass")}
                         margin="normal"
-                        name="confirmPassword"
+                        name={t("confirmpass")}
                         onBlur={handleBlur}
                         onChange={handleChange}
                         type="password"
@@ -226,7 +229,7 @@ const Register = () => {
                       type="submit"
                       variant="contained"
                     >
-                      Create Account
+                      {t("signtitle")}
                     </Button>
                   </Box>
                 </CardContent>

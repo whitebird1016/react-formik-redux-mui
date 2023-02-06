@@ -3,5 +3,15 @@
   "button": " Sign In",
   "text": " Don't have an account?",
   "email": "Email",
-  "password": "Password"
+  "password": "Password",
+  "confirmpass": "Confirm Password",
+  "phone": "Phone",
+  "state": "State",
+  "city": "City",
+  "address1": "Address1",
+  "address2": "Address2",
+  "firstname": "First name",
+  "lastname": "Last name",
+  "signtitle": "Create Account",
+  "welcome": "Welcome"
 }

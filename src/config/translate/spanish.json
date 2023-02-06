@@ -3,5 +3,15 @@
   "button": "Iniciar sesión",
   "text": "¿No tienes una cuenta?",
   "email": "Correo electrónico",
-  "password": "Contraseña"
+  "password": "Contraseña",
+  "confirmpass": "Confirmar Contraseña",
+  "phone": "Teléfono",
+  "state": "Estado",
+  "city": "Ciudad",
+  "address1": "Dirección1",
+  "address2": "Dirección2",
+  "firstname": "Nombre de pila",
+  "lastname": "Apellido",
+  "signtitle": "Crear una cuenta",
+  "welcome": "bienvenida"
 }

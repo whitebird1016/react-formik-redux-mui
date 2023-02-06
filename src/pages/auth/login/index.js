@@ -82,7 +82,7 @@ const Login = () => {
                   mx="auto"
                   width="100%"
                 >
-                  <Typography variant="h4">Welcome</Typography>
+                  <Typography variant="h4">{t("welcome")}</Typography>
                   <Box mt={2}>
                     <Typography variant="body1">{t("title")}</Typography>
                   </Box>
