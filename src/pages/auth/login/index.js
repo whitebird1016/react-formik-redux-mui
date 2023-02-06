@@ -132,7 +132,7 @@ const Login = () => {
                 <Typography variant="body1">
                   {t("text")}
                   <Link component={NavLink} to="/register">
-                    Create one here
+                    {t("createone")}
                   </Link>
                 </Typography>
               </Box>

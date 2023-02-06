@@ -211,7 +211,7 @@ const Register = () => {
                         }
                         label={t("confirmpass")}
                         margin="normal"
-                        name={t("confirmpass")}
+                        name="confirmPassword"
                         onBlur={handleBlur}
                         onChange={handleChange}
                         type="password"
@@ -236,9 +236,9 @@ const Register = () => {
               </Card>
               <Box mt={5} textAlign="center">
                 <Typography variant="body1">
-                  Already have an account ?
+                  {t("footertext")}
                   <Link component={NavLink} to="/">
-                    Sign In
+                    {t("button")}
                   </Link>
                 </Typography>
               </Box>

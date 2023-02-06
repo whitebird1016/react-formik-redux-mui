@@ -13,5 +13,7 @@
   "firstname": "Nombre de pila",
   "lastname": "Apellido",
   "signtitle": "Crear una cuenta",
-  "welcome": "bienvenida"
+  "welcome": "bienvenida",
+  "createone": "Crea uno aquí",
+  "footertext": "Ya tienes una cuenta ?"
 }

@@ -13,5 +13,7 @@
   "firstname": "First name",
   "lastname": "Last name",
   "signtitle": "Create Account",
-  "welcome": "Welcome"
+  "welcome": "Welcome",
+  "createone": "Create one here",
+  "footertext": "Already have an account ?"
 }
