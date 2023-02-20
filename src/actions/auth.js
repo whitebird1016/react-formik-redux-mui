@@ -1,6 +1,16 @@
-import { LOGIN_REQUEST, SIGNUP_REQUEST } from "../types";
+import {
+  GETUSER,
+  LOGIN_REQUEST,
+  REFRESH_TOKEN_REQUEST,
+  SIGNUP_REQUEST,
+} from "../types";
 import { requestFail, requestPending, requestSuccess } from "../utills/api";
-import { loginApi, signupApi } from "../services/authService";
+import {
+  getUserInfo,
+  loginApi,
+  refreshAccess,
+  signupApi,
+} from "../services/authService";
 import { push } from "redux-first-history";
 import { toast } from "react-toastify";
 
@@ -9,16 +19,19 @@ export const login = (data) => {
     try {
       dispatch({ type: requestPending(LOGIN_REQUEST) });
       const response = await loginApi(data);
-      const { user, token } = response;
-      if (user && token) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+
+      const { accessToken, refreshToken, user } = response;
+      if (accessToken && refreshToken && user) {
         dispatch({
           type: requestSuccess(LOGIN_REQUEST),
           payload: {
+            accessToken,
+            refreshToken,
             user,
           },
         });
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
         dispatch(push("/home"));
         toast("Login Success");
       } else {
@@ -39,18 +52,19 @@ export const login = (data) => {
 };
 
 export function signup(data) {
-  console.log(data);
   return async (dispatch) => {
     try {
       dispatch({ type: requestPending(SIGNUP_REQUEST) });
       const response = await signupApi(data);
-      const { user, token } = response;
-      if (user && token) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+      const { accessToken, refreshToken, user } = response;
+      if (accessToken && refreshToken && user) {
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
         dispatch({
           type: requestSuccess(SIGNUP_REQUEST),
           payload: {
+            accessToken,
+            refreshToken,
             user,
           },
         });
@@ -72,3 +86,45 @@ export function signup(data) {
     }
   };
 }
+
+export const refreshAccessToken = (data) => async (dispatch) => {
+  if (!data) {
+    dispatch({
+      type: requestFail(REFRESH_TOKEN_REQUEST),
+      payload: "Refresh token not found",
+    });
+    return;
+  }
+  try {
+    const { accessToken } = await refreshAccess(data);
+    console.log(accessToken, "accessToken");
+    dispatch({
+      type: requestSuccess(REFRESH_TOKEN_REQUEST),
+      payload: { accessToken },
+    });
+    localStorage.setItem("accessToken", accessToken);
+  } catch (error) {
+    dispatch({
+      type: requestFail(REFRESH_TOKEN_REQUEST),
+      payload: error.response.data.message,
+    });
+    throw error;
+  }
+};
+
+export const accessTokenData = (data) => async (dispatch) => {
+  try {
+    const { user } = await getUserInfo(data);
+    console.log(user, "user");
+    dispatch({
+      type: requestSuccess(GETUSER),
+      payload: { user },
+    });
+  } catch (error) {
+    dispatch({
+      type: requestFail(GETUSER),
+      payload: error.response.data.message,
+    });
+    throw error;
+  }
+};

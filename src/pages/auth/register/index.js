@@ -54,15 +54,7 @@ const Register = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({
-            errors,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            isSubmitting,
-            touched,
-            values,
-          }) => (
+          {({ handleChange, handleSubmit, isSubmitting, values }) => (
             <form onSubmit={handleSubmit}>
               <Card>
                 <Box
@@ -78,13 +70,10 @@ const Register = () => {
                   <Box display="flex" justifyContent="space-between">
                     <Box width="48%">
                       <TextField
-                        error={Boolean(touched.firstName && errors.firstName)}
                         fullWidth
-                        helperText={touched.firstName && errors.firstName}
                         label={t("firstname")}
                         margin="normal"
                         name="firstName"
-                        onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.firstName}
                         variant="outlined"
@@ -92,13 +81,10 @@ const Register = () => {
                     </Box>
                     <Box width="48%">
                       <TextField
-                        error={Boolean(touched.lastName && errors.lastName)}
                         fullWidth
-                        helperText={touched.lastName && errors.lastName}
                         label={t("lastname")}
                         margin="normal"
                         name="lastName"
-                        onBlur={handleBlur}
                         onChange={handleChange}
                         value={values.lastName}
                         variant="outlined"
@@ -106,79 +92,61 @@ const Register = () => {
                     </Box>
                   </Box>
                   <TextField
-                    error={Boolean(touched.email && errors.email)}
                     fullWidth
-                    helperText={touched.email && errors.email}
                     label={t("email")}
                     margin="normal"
                     name="email"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     type="email"
                     value={values.email}
                     variant="outlined"
                   />
                   <TextField
-                    error={Boolean(touched.address1 && errors.address1)}
                     fullWidth
-                    helperText={touched.address1 && errors.address1}
                     label={t("address1")}
                     margin="normal"
                     name="address1"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.address1}
                     variant="outlined"
                     SelectProps={{ native: true }}
                   />
                   <TextField
-                    error={Boolean(touched.address2 && errors.address2)}
                     fullWidth
-                    helperText={touched.address2 && errors.address2}
                     label={t("address2")}
                     margin="normal"
                     name="address2"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.address2}
                     variant="outlined"
                     SelectProps={{ native: true }}
                   />
                   <TextField
-                    error={Boolean(touched.city && errors.city)}
                     fullWidth
-                    helperText={touched.city && errors.city}
                     label={t("city")}
                     margin="normal"
                     name="city"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.city}
                     variant="outlined"
                     SelectProps={{ native: true }}
                   />
                   <TextField
-                    error={Boolean(touched.state && errors.state)}
                     fullWidth
-                    helperText={touched.state && errors.state}
                     label={t("state")}
                     margin="normal"
                     name="state"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.state}
                     variant="outlined"
                     SelectProps={{ native: true }}
                   />
                   <TextField
-                    error={Boolean(touched.phonenumber && errors.phonenumber)}
                     fullWidth
                     placeholder="999-999-9999"
-                    helperText={touched.phonenumber && errors.phonenumber}
                     label={t("phone")}
                     margin="normal"
                     name="phonenumber"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.phonenumber}
                     variant="outlined"
@@ -187,13 +155,10 @@ const Register = () => {
                   <Box display="flex" justifyContent="space-between">
                     <Box width="48%">
                       <TextField
-                        error={Boolean(touched.password && errors.password)}
                         fullWidth
-                        helperText={touched.password && errors.password}
                         label={t("password")}
                         margin="normal"
                         name="password"
-                        onBlur={handleBlur}
                         onChange={handleChange}
                         type="password"
                         value={values.password}
@@ -202,17 +167,10 @@ const Register = () => {
                     </Box>
                     <Box width="48%">
                       <TextField
-                        error={Boolean(
-                          touched.confirmPassword && errors.confirmPassword
-                        )}
                         fullWidth
-                        helperText={
-                          touched.confirmPassword && errors.confirmPassword
-                        }
                         label={t("confirmpass")}
                         margin="normal"
                         name="confirmPassword"
-                        onBlur={handleBlur}
                         onChange={handleChange}
                         type="password"
                         value={values.confirmPassword}

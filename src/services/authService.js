@@ -24,3 +24,27 @@ export const signupApi = async (payload) => {
     return error;
   }
 };
+
+export const refreshAccess = async (payload) => {
+  try {
+    const response = await axios.post(`${baseURL}/refresh_token`, payload);
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    }
+    throw new Error(response.data);
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getUserInfo = async (payload) => {
+  try {
+    const response = await axios.post(`${baseURL}/user`, payload);
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    }
+    throw new Error(response.data);
+  } catch (error) {
+    return error;
+  }
+};

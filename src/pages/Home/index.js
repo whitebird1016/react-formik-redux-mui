@@ -1,30 +1,24 @@
 import { Box } from "@material-ui/core";
-import { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const Home = () => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [session, setSession] = useState("");
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!!localStorage.getItem("token")) {
-      setSession(true);
-    } else {
-      setSession(false);
-    }
-    setFirstname(JSON.parse(localStorage.getItem("user"))?.user?.firstname);
-    setLastname(JSON.parse(localStorage.getItem("user"))?.user?.lastname);
-  }, []);
 
+const Home = () => {
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!!localStorage.getItem("refreshToken") === false) {
+      navigate("/");
+    }
+  }, []);
   const handleClick = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
     navigate("/");
   };
 
   return (
     <>
-      {session ? <> WELCOME! {firstname + lastname}</> : <>session error</>}{" "}
+      <> WELCOME! {user && user?.firstname + user?.lastname + user?.email} </>
       <Box onClick={handleClick}>sign out</Box>
     </>
   );

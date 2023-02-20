@@ -63,15 +63,7 @@ const Login = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({
-            errors,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            isSubmitting,
-            touched,
-            values,
-          }) => (
+          {({ handleChange, handleSubmit, isSubmitting, values }) => (
             <form onSubmit={handleSubmit}>
               <Card>
                 <Box
@@ -89,26 +81,20 @@ const Login = () => {
                 </Box>
                 <CardContent>
                   <TextField
-                    error={Boolean(touched.email && errors.email)}
                     fullWidth
-                    helperText={touched.email && errors.email}
                     label={t("email")}
                     margin="normal"
                     name="email"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     type="email"
                     value={values.email}
                     variant="outlined"
                   />
                   <TextField
-                    error={Boolean(touched.password && errors.password)}
                     fullWidth
-                    helperText={touched.password && errors.password}
                     label={t("password")}
                     margin="normal"
                     name="password"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     type="password"
                     value={values.password}
