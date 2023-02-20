@@ -97,11 +97,12 @@ export const refreshAccessToken = (data) => async (dispatch) => {
   }
   try {
     const { accessToken } = await refreshAccess(data);
-    console.log(accessToken, "accessToken");
+    console.log(data, accessToken, "Data");
     dispatch({
       type: requestSuccess(REFRESH_TOKEN_REQUEST),
       payload: { accessToken },
     });
+    console.log("accessToken", accessToken);
     localStorage.setItem("accessToken", accessToken);
   } catch (error) {
     dispatch({
