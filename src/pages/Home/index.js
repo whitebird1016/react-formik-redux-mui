@@ -1,13 +1,10 @@
 import { Box } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const handleClick = () => {
     localStorage.removeItem("refreshToken");
-    navigate("/");
   };
 
   return (
